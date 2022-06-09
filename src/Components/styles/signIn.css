@@ -1,0 +1,178 @@
+.body{
+    background:url('./../images/SignUp.png');
+    background-color: rgba(0, 0, 0, 0.493);
+    background-blend-mode: darken;
+    color:white;
+}
+
+#header{
+    min-height:70px ;
+    background: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+}
+
+#logo{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-left: 5%;
+    background: url('./../images/modern-company-logo-design-vector\ 1.png');
+    background-size: cover;
+}
+#nav{
+    margin-left: 50%;
+    color: black;
+    width: 40%;
+}
+#nav ul{
+    overflow: hidden;
+    list-style: none;
+    margin-top: 30px;
+}
+#nav li{
+    float: left;
+    margin-left: 10%;
+    font-weight: bold;
+}
+#SignIn{
+    margin-top: 100px;
+}
+#SignIn .inputBox{
+    display:flex;
+    justify-content: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+ 
+#SignIn label img{
+    height: 20px;
+    width:20px;
+    margin-top: -10px;
+}
+
+#SignIn input,button{
+    border: none;
+    outline: none;
+    background: grey;
+    height: 25px;
+    width: 200px;
+    border-radius: 10px;
+} 
+#SignIn label{
+    z-index: 1;
+    margin-top: 8px;
+    margin-left: 15px;
+}
+#SignIn input{
+    margin-left: -30px;
+    color: white;
+    padding-left:40px;
+    width: 160px;
+    background: rgb(191, 191, 191,0.80);
+}
+#SignIn button{
+    font-weight: bold;
+    background: blueviolet;
+    font-size: 15px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#SignIn a{
+    text-decoration: none;
+    font-size: 14px;
+    color: white;
+}
+#SignOut{
+    display: flex;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+#SignOut fieldset{
+    width:300px;
+    text-align: center;
+    border: none;
+    border-top: 1px solid rgb(255, 255, 255) ;    
+}
+#SignIn span{
+    font-weight: bold;
+    color: white;
+}
+
+#backEndResponse{
+    width: 200px;
+    height:fit-content;
+    padding-bottom: 10px;
+    color: red;
+
+}
+#BoxGoogle{
+    font-family: google;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#BoxGoogle img{
+    height: 40px;
+    width: 40px;
+    display: flex;
+    border-radius: 50%;
+}
+#BoxGoogle p{
+    margin-left: 3%;
+    font-family: poppins;
+    color: white;
+    font-size: 20px;
+
+}
+
+.Link {
+    color: rgb(68, 96, 255);
+    font-size: 12px;
+}
+
+button:hover{
+    cursor: pointer;
+}
+button{
+    display: block;
+}
+
+#dropMen{
+    height: 40px;
+    width:40px;
+    position: absolute;
+    right: 10px;
+    background: url('./../images/menu-fold-one.png');
+    background-size: cover;
+    display: none;
+}
+@media screen and (max-width:600px) {
+    #nav{
+        position:absolute;
+        right: 10px;
+        margin-top: 245px;
+        overflow: hidden;
+        padding-bottom: 20px;
+        background: rgba(255, 255, 255, 0.514);
+        
+    }
+    #nav li{
+        margin-top: 20px;
+        float: none;
+    }
+    #SignIn {
+        margin-top: 40%;
+    }
+    #dropMen{
+        display: block;
+    }
+}

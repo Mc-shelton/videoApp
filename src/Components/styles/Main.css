@@ -1,0 +1,188 @@
+* {
+  outline: none;
+  margin: 0;
+  /* border:2px solid red; */
+}
+.hand {
+  cursor: pointer;
+}
+#header1 {
+  height: 90px;
+  display: flex;
+  background: rgb(249, 254, 248);
+  align-items: center;
+}
+#bell {
+  margin-left: 65%;
+  height: 25px;
+  margin-top: 30px;
+}
+#dropDwn {
+  margin-left: 4%;
+  margin-top: 30px;
+}
+#drop {
+  height: 20px;
+  margin-bottom: 5px;
+  margin-left: -12px;
+}
+#plus {
+  height: 40px;
+}
+#header1 #avator {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  margin-left: 5%;
+}
+#header1 #avator img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+#logo {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  margin-left: 4%;
+  background: url("./../images/modern-company-logo-design-vector\ 1.png");
+  background-size: cover;
+}
+.nav {
+  position: relative;
+  float: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(251, 251, 251);
+  height: 100%;
+  /* position:absolute; */
+  /* border: 2px solid red; */
+}
+.nav #MenuButt {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  align-self: baseline;
+  margin-left: -5%;
+  margin-top: 30px;
+  background: url("./../images/menu-fold-one.png");
+  background-size: cover;
+}
+.nav .navBox {
+  margin-top: 20px;
+}
+.nav .navBox a {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  color: rgb(75, 0, 124);
+  font-weight: bold;
+  font-family: calibri;
+}
+
+.nav .navBox .navImage {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin-left: 15%;
+}
+.nav .navBox .navImage img {
+  width: 100%;
+  height: 100%;
+}
+.nav .navBox p {
+  margin-left: 10px;
+}
+
+.nav .navBox .focus {
+  /* background:   rgb(104, 63, 162); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  margin-left: -3%;
+  box-shadow: rgba(5, 7, 8, 0.7) 0px 8px 24px;
+}
+.nav .navBox .focus img {
+  height: 50%;
+  width: 50%;
+}
+.navPar {
+  display: none;
+}
+#rightBox {
+  float: right;
+  height: 100%;
+  border-left: 3px solid blue;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  #bigRight {
+    position: absolute;
+    min-width: 60%;
+    right: 0;
+    /* display: none; */
+    /* bottom: 50%; */
+    background: white;
+    box-shadow: rgba(5, 7, 8, 0.4) 4px 20px 24px;
+    overflow: hidden;
+  }
+  #rightBox {
+    border: none;
+    float: none;
+  }
+  #bell {
+    margin-left: 40%;
+    height: 20px;
+  }
+  #drop {
+    height: 15px;
+  }
+  #plus {
+    height: 30px;
+  }
+  #dropDwn {
+    margin-top: 40px;
+    margin-left: 2%;
+  }
+  .nav {
+    position: absolute;
+    height: 85%;
+    /* display:none; */
+    min-width: 20%;
+  }
+  #LeftSlide{
+      height: 30px;
+      width: 30px;
+      position: absolute;
+      z-index: 1;
+      background: url('./../images/down-one.png');
+      transform:rotate(-90deg);
+      margin-top:20px;
+      display:flex;
+      justify-content:center;
+      align-items: center;
+  }
+  .inMate{
+    border: 1px solid grey;
+    height: 100%;
+    width: 100%;
+    border-radius:60% ;
+    animation:inMate 1s ease-in-out infinite;
+  }
+
+  @keyframes inMate{
+    from{
+      height:0;
+      width: 0;
+    }
+    to{
+      height:100%;
+      width: 100%;
+    }
+  }
+}
