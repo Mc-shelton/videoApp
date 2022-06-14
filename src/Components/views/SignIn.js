@@ -4,21 +4,24 @@ import "./../styles/signIn.css";
 import google from "./../images/google logo.png";
 import lock from "./../images/Private Lock.png";
 import user from "./../images/User.png";
+import axios from "axios";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
 
-    if(window.innerWidth<600){
-      var toggleNav = false
-    }else{
-      var toggleNav = true
+    if (window.innerWidth < 600) {
+      var toggleNav = false;
+    } else {
+      var toggleNav = true;
     }
     this.state = {
-      isLoggedin: true,
+      isLoggedin: false,
       toggleNav: toggleNav,
+      Email: "",
+      Password: "",
+      LogState: "",
     };
-
   }
   componentDidMount() {
     var body = document.getElementsByClassName("body");
@@ -33,6 +36,45 @@ class SignIn extends React.Component {
       this.setState({ toggleNav: false });
     } else {
       this.setState({ toggleNav: true });
+    }
+  };
+  submitLogin = () => {
+    if (this.state.Email == "" || this.state.Password == "") {
+      this.setState({ LogState: "You left some fields empty" });
+    } else {
+      this.setState({ LogState: "Loading..." });
+      var butLog = document.getElementById("buttLog");
+      butLog.disabled = true;
+      axios
+        .post(
+          "https://dawn-aviation.com/static/php/signIn.php",
+          JSON.stringify({
+            Email: this.state.Email,
+            Password: this.state.Password,
+          })
+        )
+        .then((Response) => {
+          var feedBack = Response.data;
+          if (feedBack != "") {
+            this.setState({ LogState: "success... redirecting..." });
+            var butLog = document.getElementById("buttLog");
+            butLog.disabled = false;
+
+            this.props.history.push({
+              pathname: "/",
+              state: { token: true, userData: feedBack, showNav: true },
+            });
+          } else {
+            this.setState({ LogState: "Login Failed Try again" });
+            var butLog = document.getElementById("buttLog");
+            butLog.disabled = false;
+          }
+        })
+        .catch((err) => {
+          this.setState({ LogState: "You are offline  " });
+          var butLog = document.getElementById("buttLog");
+          butLog.disabled = false;
+        });
     }
   };
   render() {
@@ -62,30 +104,39 @@ class SignIn extends React.Component {
           </div>
           <div id="SignIn">
             <form action="./../../backEnd/php/signIn.php" method="POST">
-              <div class="inputBox"></div>
+              <div class="inputBox">{this.state.LogState}</div>
               <div class="inputBox">
                 <label for="UserEmail">
                   <img src={user} alt="" />
                 </label>
-                <input type="text" name="UserEmail" placeholder="User Email" />
+                <input
+                  type="text"
+                  name="UserEmail"
+                  placeholder="User Email"
+                  onChange={(e) => {
+                    this.setState({ Email: e.target.value });
+                    console.log(e.target.value);
+                  }}
+                />
               </div>
               <div class="inputBox">
                 <label for="passWord">
                   <img src={lock} alt="" />
                 </label>
-                <input type="password" name="passWord" placeholder="Password" />
+                <input
+                  type="password"
+                  name="passWord"
+                  placeholder="Password"
+                  onChange={(e) => {
+                    this.setState({ Password: e.target.value });
+                    console.log(e.target.value);
+                  }}
+                />
               </div>
               <div class="inputBox">
-                <Link
-                  to={{
-                    pathname: "/",
-                    state: { token: true },
-                  }}
-                >
-                  <button type="button" name="UserButt">
-                    LogIn
-                  </button>
-                </Link>
+                <button type="button" id="buttLog" onClick={this.submitLogin}>
+                  LogIn
+                </button>
                 <br />
                 <br />
               </div>
@@ -141,3 +192,5 @@ class SignIn extends React.Component {
   }
 }
 export default SignIn;
+// Username: dawnavi2
+// Password: *DBexZ07bEw6#7

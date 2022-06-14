@@ -1,6 +1,6 @@
   #uploadform{
     border: 1px solid grey;
-    width: 90%;
+    width: 80%;
     margin-top: 50px;
     padding-left: 10%;
     padding-top: 20px;
@@ -59,4 +59,22 @@
     padding-right: 15px;
     font-weight: bold;
     cursor:pointer;
+    width: 100px;
+}
+@media screen and (max-Width:600px){
+    #uploadform{
+        width: 113%;
+        margin-top: 10%;
+        padding-top: 100px;
+        padding-bottom: 100px    ;
+    }
+    #uploadform input{
+        width:85%;
+    }
+#fileLabel{
+    width: 80%;
+}
+#uploadform button{
+    width: 100px;
+}
 }

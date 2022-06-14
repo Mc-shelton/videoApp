@@ -120,6 +120,23 @@
   width: 100%;
 }
 
+#RightSlide{
+  height: 40px;
+  width: 40px;
+  background: url('./../images/down-one.png');
+  background-position: center;
+  transform: rotate(90deg);
+  border-radius: 50%;
+  display:flex;
+  margin-top: 280px;
+  justify-content: center;
+  align-items: center;
+  position:absolute;
+  right: 5px;
+  z-index: 3;
+  transition: 0.1s ease-in-out;
+}
+
 @media screen and (max-width: 600px) {
   #bigRight {
     position: absolute;
@@ -162,7 +179,7 @@
       z-index: 1;
       background: url('./../images/down-one.png');
       transform:rotate(-90deg);
-      margin-top:20px;
+      margin-top:0px;
       display:flex;
       justify-content:center;
       align-items: center;
@@ -175,14 +192,15 @@
     animation:inMate 1s ease-in-out infinite;
   }
 
-  @keyframes inMate{
-    from{
-      height:0;
-      width: 0;
-    }
-    to{
-      height:100%;
-      width: 100%;
-    }
+}
+
+@keyframes inMate{
+  from{
+    height:0;
+    width: 0;
+  }
+  to{
+    height:100%;
+    width: 100%;
   }
 }

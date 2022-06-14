@@ -1,11 +1,20 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class LogOut extends React.Component{
     constructor(){
         super()
         this.state ={
 
+        }
+    }
+    
+    logOut = async ()=>{
+        try{
+            await AsyncStorage.removeItem('token')
+        }catch(e){
+            console.log(e)
         }
     }
     render(){
@@ -15,15 +24,14 @@ class LogOut extends React.Component{
             color:'blue',
             marginLeft:'20%'
         }}>
-        <Link to ={{
-            pathname:'/',
-            state:{
-                token:false
-            }
-        }}>
-            <h3>Click to Log Out</h3>
+            <h3 onClick={()=>{
+                this.logOut()
+                this.props.history.push({
+                    pathname:'/',
+                    state:{token:false}
+                })
+            }}>Click to Log Out</h3>
 
-        </Link>
         </div>
     )
 }}

@@ -6,6 +6,7 @@ import lock from "./../images/Private Lock.png";
 import mail from "./../images/Secured Letter.png";
 import "./../styles/signUp.css";
 
+import axios from "axios"
 class signUp extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,11 @@ class signUp extends React.Component {
     this.state = {
       token: true,
       toggleNav: toggleNav,
+      Email:'',
+      Password:'',
+      UserName:'',
+      Password2:'',
+      LogState:''
     };
   }
 
@@ -38,6 +44,49 @@ class signUp extends React.Component {
       this.setState({ toggleNav: true });
     }
   };
+  submitLogin = () => {
+    if (this.state.Email == "" || this.state.Password == "" || this.state.UserName == "") {
+      this.setState({ LogState: "You left some fields empty" });
+      
+    } else {
+      if(this.state.Password != this.state.Password2){
+        this.setState({LogState:"Passwords din't match"})
+      }else{
+        this.setState({ LogState: "Loading..." });
+        var butLog = document.getElementById("buttLog");
+        butLog.disabled = true;
+        axios
+          .post(
+            "https://dawn-aviation.com/static/php/singUp.php",
+            JSON.stringify({
+              Email: this.state.Email,
+              Password: this.state.Password,
+              UserName: this.state.UserName,
+            })
+          )
+          .then((Response) => {
+            var feedBack = Response.data;
+            if (feedBack != "Email already used") {
+              this.setState({ LogState: "success... redirecting..." });
+              var butLog = document.getElementById("buttLog");
+              butLog.disabled = false;
+  
+              this.props.history.push({
+                pathname: "/",
+                state: { token: true, userData: feedBack, showNav: true },
+              });
+            } else {
+              this.setState({ LogState: feedBack });
+              var butLog = document.getElementById("buttLog");
+              butLog.disabled = false;
+            }
+          })
+          .catch((err) => {
+            this.setState({ LogState: "You are offline  " });
+            var butLog = document.getElementById("buttLog");
+            butLog.disabled = false;
+          });}
+    }}
   render() {
     return (
       <div class="body">
@@ -65,24 +114,36 @@ class signUp extends React.Component {
         </div>
         <div id="SignIn">
           <form action="./../../backEnd/php/LogRes.php" method="POST">
-            <div class="inputBox"></div>
+              <div class="inputBox">{this.state.LogState}</div>
             <div class="inputBox">
               <label for="UserName">
                 <img src={user} alt="" />
               </label>
-              <input type="text" name="UserName" placeholder="User Name" />
+              <input type="text" name="UserName"
+                  onChange={(e) => {
+                    this.setState({ UserName: e.target.value });
+                    console.log(e.target.value);
+                  }} placeholder="User Name" />
             </div>
             <div class="inputBox">
               <label for="UserEmail">
                 <img src={mail} alt="" />
               </label>
-              <input type="email" name="UserEmail" placeholder="User Email" />
+              <input type="email" name="UserEmail" 
+                  onChange={(e) => {
+                    this.setState({ Email: e.target.value });
+                    console.log(e.target.value);
+                  }} placeholder="User Email" />
             </div>
             <div class="inputBox">
               <label for="passWord">
                 <img src={lock} alt="" />
               </label>
-              <input type="password" name="passWord" placeholder="Password" />
+              <input type="password" name="passWord" 
+                  onChange={(e) => {
+                    this.setState({ Password: e.target.value });
+                    console.log(e.target.value);
+                  }} placeholder="Password" />
             </div>
             <div class="inputBox">
               <label for="ConPassWord">
@@ -92,21 +153,18 @@ class signUp extends React.Component {
                 type="password"
                 name="ConPass"
                 placeholder="Confirm Password"
+                  onChange={(e) => {
+                    this.setState({ Password2: e.target.value });
+                    console.log(e.target.value);
+                  }}
               />
             </div>
             <div class="inputBox">
-              <Link
-                to={{
-                  pathname: "/",
-                  state: { token: true },
-                }}
-              >
-                <button type="button" name="UserButt">
+                <button type="button" name="UserButt" id='buttLog' onClick={this.submitLogin}>
                   LogIn
                 </button>
                 <br />
                 <br />
-              </Link>
             </div>
             <div class="inputBox">
               <Link

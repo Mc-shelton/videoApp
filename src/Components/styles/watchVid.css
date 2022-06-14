@@ -1,0 +1,69 @@
+#bigPlay{
+    margin-left: 70px;
+    width: 75%;
+    padding-left: 10px;
+    padding-top: 5px;
+}
+#leftPlay{
+    width: 60%;
+    float: left;
+    height:88%;
+    overflow: scroll;
+}
+#leftPlay video{
+    width: 98%;
+    padding: 0;
+}
+#bigPlay #search{
+    padding-bottom: 20px;
+}
+#bigPlay #search input{
+    margin-top: 5px;
+
+}
+#comments h4{
+    font-style: italic;
+}
+#comments{
+    color:rgb(97, 97, 97);
+}
+#comments p{
+    font-size: 14px;
+}
+
+#rightList{
+    float: right;
+    width: 37%;
+    height: 88%;
+    overflow: scroll;
+    padding-right: 5px;
+}
+#rightList .boxes{
+    border: 1px solid grey;
+    margin-top: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#rightList .boxes video{
+    width: 40%; 
+    height:100px;
+    float: left;
+    padding: 0;
+
+}
+#rightList .boxes .vidDet{
+    overflow: hidden;
+    padding-left: 10px;
+}
+#rightList .boxes .vidDet p{
+    font-size:12px;
+    height: 40px;
+    overflow: hidden;
+}
+
+#rightList .boxes:hover{
+    cursor: pointer;
+}
