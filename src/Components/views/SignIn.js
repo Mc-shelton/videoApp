@@ -55,14 +55,15 @@ class SignIn extends React.Component {
         )
         .then((Response) => {
           var feedBack = Response.data;
+          var feedJson;
           if (feedBack != "") {
             this.setState({ LogState: "success... redirecting..." });
             var butLog = document.getElementById("buttLog");
             butLog.disabled = false;
-
+            feedJson = (JSON.stringify(feedBack))
             this.props.history.push({
               pathname: "/",
-              state: { token: true, userData: feedBack, showNav: true },
+              state: { token: true, userData: feedJson, showNav: true },
             });
           } else {
             this.setState({ LogState: "Login Failed Try again" });

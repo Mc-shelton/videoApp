@@ -24,6 +24,7 @@ function Main(props) {
   var [toggleButt, setToggleButt] = useState(true);
   var [click, setClick] = useState(false);
   var [windClick, setWindClick] = useState(false);
+  var [Data, setUserData] = useState('');
   var ver;
 
   // var getData = async () => {
@@ -45,21 +46,25 @@ function Main(props) {
 
   useEffect(() => {
     var token;
-    console.log('storage',AsyncStorage.getItem('token'))
-    console.log('props',props.location)
+    var userData;
     const getDataStore = async () => {
       try {
         token = await AsyncStorage.getItem("token")
+        userData = await AsyncStorage.getItem("userData")
         if (token != 'undefined' && token != null && token != 'false') {
           setIsLoggedIn(token);
-          console.log('login',isLoggedin)
-          console.log('lo',token)
+          if(userData != 'undefined' && userData != null && userData != 'false'){
+            setUserData(userData)
+            console.log('data',Data)
+          }
         } else {
           if (props.location.state != undefined) {
             var setToken = props.location.state.token;
+            var userData = props.location.state.userData;
             await AsyncStorage.setItem("token", setToken);
-            setIsLoggedIn(props.location.state.token) 
-            console.log(isLoggedin)
+            await AsyncStorage.setItem("userData", userData);
+            setIsLoggedIn(setToken) 
+            setUserData(userData) 
           }
         }
       } catch (e) {
@@ -77,7 +82,6 @@ function Main(props) {
     //   });
     // }
   });
-
   useEffect(() => {
     console.log(click);
     if (click == true) {
@@ -160,7 +164,7 @@ function Main(props) {
           <Route path="/watchVid" component={watchVid} />
           <Redirect to={{
             pathname:'/Dashboard',
-            state:{toggleB:true}
+            state:{toggleB:true,userData:Data}
 
           }} />
         </Switch>

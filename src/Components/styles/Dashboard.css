@@ -73,9 +73,17 @@ video{
 }
 @media screen and (max-width: 600px) {
   #bigDash {
-    margin-left: 5%;
+    margin-left: 10%;
+    
+    width: 95%;
+    margin-left: 2%;
   }
   #searchInput {
-    width: 90%;
+    width: 70%;
+  }
+  .vidBox{
+    width:75%;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
