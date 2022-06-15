@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import "./../styles/Dashboard.css";
 import Flatlist from "flatlist-react";
 
+import ReactPlayer from 'react-player'
 import src from "./../images/omuna.mp4";
+import { toBeRequired } from "@testing-library/jest-dom/dist/matchers";
 
 function Dashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,20 +46,20 @@ function Dashboard() {
         <div class="detailBox">
           <h5>Title of Vid</h5>
           <p>A lot of description</p>
-          <video
+          <ReactPlayer
             class="handBox"
             onMouseOver={() => {
               var handBox = document.getElementsByClassName("handBox");
-              handBox[ind].play();
+              handBox[ind].playing = true;
             }}
             onMouseLeave ={()=>{
                 var handBox = document.getElementsByClassName('handBox')
-                handBox[ind].pause()
+                handBox[ind].playing = true
                 handBox[ind].currentTime = 0;
             }}
             disablePictureInPicture
             muted
-            src={src}
+            url='https://dawn-aviation.com/Static/php/Uploads/files/testLink.mp4'
           />
         </div>
       </div>
