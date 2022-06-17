@@ -71,6 +71,9 @@ video{
   max-height: 110px;
   padding: 5px;
 }
+#bigDash .loader{
+  margin-left:40%;
+}
 @media screen and (max-width: 600px) {
   #bigDash {
     margin-left: 10%;

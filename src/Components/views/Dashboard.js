@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./../styles/Dashboard.css";
 import Flatlist from "flatlist-react";
 // import {Player} from 'video-react'
-import ReactPlayer from 'react-player'
+// import ReactPlayer from 'react-player'
 import src from "./../images/omuna.mp4";
 import { toBeRequired } from "@testing-library/jest-dom/dist/matchers";
 import axios from "axios";
@@ -11,7 +11,8 @@ import axios from "axios";
 function Dashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [bigHeight, setBigHeight] = useState();
-  const [videos, setVideos] = useState();
+  const [videos, setVideos] = useState('');
+  const [loader, setLoader] = useState(true);
   
   const handMouse = () => {
     this.play();
@@ -29,14 +30,25 @@ function Dashboard() {
     //     })
     // });
 
-    axios.get(
-    'https://dawn-aviation.com/static/php/download.php'
-    ).then((Res)=>{
+    axios({
+    url:'https://dawn-aviation.com/static/php/download.php',
+    }).then((Res)=>{
       setVideos(Res.data)
-      console.log(Res.data)
+      setLoader(false)
     }).catch((err)=>{
-      console.log(err)
     })
+//   fetch('http://social-ci.org/chafua/pullmenu.php')
+//   .then((response)=>response.json())
+//   .then((responseJson)=>{
+//     console.log(responseJson)
+// })
+//   .catch((error) => {
+//     alert(error);
+//   });
+while(videos == ''){
+  setLoader(true)
+
+}
   });
   const renderVideos = (vid,ind) => {
     return (
@@ -80,6 +92,7 @@ function Dashboard() {
         </div>
         <h3>Recently Added</h3>
         <div id="bigRenderBox" style={{ maxHeight: `${bigHeight}px` }}>
+        {loader?<div class ='loader'></div>:<></>}
           <Flatlist
             list={videos}
             renderItem={renderVideos}
@@ -92,4 +105,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Dashboard
