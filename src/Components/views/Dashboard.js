@@ -13,6 +13,7 @@ function Dashboard() {
   const [bigHeight, setBigHeight] = useState();
   const [videos, setVideos] = useState('');
   const [loader, setLoader] = useState(true);
+  const [veryinit, setVeryinit] = useState();
   
   const handMouse = () => {
     this.play();
@@ -30,40 +31,74 @@ function Dashboard() {
     //     })
     // });
 
-    axios({
-    url:'https://dawn-aviation.com/static/php/download.php',
-    }).then((Res)=>{
-      setVideos(Res.data)
+    // axios({
+    // url:'https://dawn-aviation.com/static/php/download.php',
+    // }).then((Res)=>{
+    //   setVideos(Res.data)
+    //   setLoader(false)
+    // }).catch((err)=>{
+    // })
+    if(videos == ''){
+      setLoader(true)
+    }else{
       setLoader(false)
-    }).catch((err)=>{
-    })
-//   fetch('http://social-ci.org/chafua/pullmenu.php')
-//   .then((response)=>response.json())
-//   .then((responseJson)=>{
-//     console.log(responseJson)
-// })
-//   .catch((error) => {
-//     alert(error);
-//   });
-while(videos == ''){
-  setLoader(true)
-
-}
+    }
   });
+  const search = (value)=>{
+    let items = veryinit
+    let text = value.toLowerCase()
+
+    let filteredName = items.filter((item)=>{
+      // console.log(item.)
+      return item.videoName.toLowerCase().match(text)
+    })
+    if(!text || text === '' || text == ' '){
+      console.log('first')
+      setVideos(veryinit)
+      
+    }
+      else if(!filteredName.length){
+      console.log(filteredName)
+      setVideos([])
+      }
+      else{
+      console.log('third')
+      setVideos(filteredName)
+      }
+      filteredName = veryinit
+      console.log(filteredName)
+      console.log('changed')
+  }
+  var change;
+  useEffect(()=>{
+
+  fetch('https://dawn-aviation.com/static/php/download.php')
+  .then((response)=>response.json())
+  .then((responseJson)=>{
+    console.log(responseJson)
+    setVideos(responseJson)
+    setVeryinit(responseJson)
+})
+  .catch((error) => {
+    change = error;
+    console.log(change)
+  });
+  },[change])
+
   const renderVideos = (vid,ind) => {
     return (
         <Link to={{ 
             pathname:'/watchVid',
-            state:{vidList:videos,vidPlay:ind}
+            state:{vidList:videos,veryList:veryinit,vidPlay:ind}
         }}>
       <div class="vidBox" key={ind}>
-        <h5>Label</h5>
+        <h5>{vid['Label']}</h5>
         <div>
-          <h4>TOPIC OF STUDY</h4>
+          <h4>{vid['Topic']}</h4>
         </div>
         <div class="detailBox">
-          <h5>Title of Vid</h5>
-          <p>A lot of description</p>
+          <h5>{vid['videoName']}</h5>
+          <p>{vid['videoDescription']}</p>
           <video
             class="handBox"
             onMouseOver={() => {
@@ -72,12 +107,13 @@ while(videos == ''){
             }}
             onMouseLeave ={()=>{
                 var handBox = document.getElementsByClassName('handBox')
-                handBox[ind].play()
-                handBox[ind].currentTime = 0;
+                handBox[ind].pause()
+                // handBox[ind].currentTime = 0;
             }}
             disablePictureInPicture
             muted
-            src={src}
+            src={vid['Link']}
+            poster={vid['ThumbNail']}
           />
         </div>
       </div>
@@ -88,15 +124,19 @@ while(videos == ''){
     <React.Fragment>
       <div id="bigDash">
         <div id="search">
-          <input id="searchInput" type="text" placeholder="Search here" />
+          <input id="searchInput" type="text" onChange={(e)=>{
+            search(e.target.value)
+          }} placeholder="Search here" />
         </div>
         <h3>Recently Added</h3>
         <div id="bigRenderBox" style={{ maxHeight: `${bigHeight}px` }}>
         {loader?<div class ='loader'></div>:<></>}
           <Flatlist
+            key={(vid)=>{vid.videoId.toString()}}
             list={videos}
             renderItem={renderVideos}
-            renderWhenEmpty={() => <div>You have not added any video</div>}
+            renderWhenEmpty={() => <p style={{textAlign:'center'}}>fetching videos</p>}
+
             // sortBy = {}
           />
         </div>

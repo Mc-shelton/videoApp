@@ -131,6 +131,7 @@ class Upload extends React.Component {
             <input
               id="inFile"
               type="file"
+              accept="images/*"
               name="file"
               style={{ display: "none" }}
               onChange={(e) => {

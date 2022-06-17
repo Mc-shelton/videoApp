@@ -1,0 +1,40 @@
+#bigSearch{
+    /* border: 2px solid red; */
+    width: 76%;
+    margin-left: 5%;
+    margin-top: 20px;
+    display:flex ;
+    /* background-color: grey; */
+
+}
+#smallerBig{
+    /* border: 2px solid red; */
+    padding: 10px;
+    padding-left: 30px;
+    width: 90%;
+    flex-wrap: wrap;
+    display: flex;
+    overflow: scroll;
+}
+.smallPox{
+    border: 2px solid orange;
+    margin-left: 20px;
+    height: 150px;
+    border-radius:15px ;
+    padding: 10px;
+    width: 200px;
+}
+.smallPox .h5{
+    color: rgb(201, 145, 0) ;
+    text-decoration: none;
+    margin-top: 20px;
+}
+.smallPox .h62{
+    margin-top: 5px;
+    text-decoration: none;
+    font-size: 15px;
+}
+.smallPox .p{
+    margin-top: 10px;
+    font-size: 15px;
+}

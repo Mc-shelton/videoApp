@@ -165,7 +165,7 @@ function Main(props) {
           <Route path="/watchVid" component={watchVid} />
           <Route path="/ProfileSet" component={ProfileSet} />
           <Redirect to={{
-            pathname:'/Dashboard',
+            pathname:'/Search',
             state:{toggleB:true,userData:Data}
 
           }} />
