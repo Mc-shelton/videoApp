@@ -1,12 +1,11 @@
   #uploadform{
     border: 1px solid grey;
     width: 80%;
-    margin-top: 50px;
+    margin-top: 30px;
     padding-left: 10%;
-    padding-top: 20px;
     padding-bottom: 20px;
+    overflow: scroll;
 }
-
 #uploadform input{
     display:block;
     height:20px;
@@ -29,15 +28,20 @@
     color: rgb(201, 145, 0);
     font-size: 12px;
 }
-
+#uploadform textarea{
+    border: 2px solid red;
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 30%;
+    height: 100px;
+}
 #fileLabel{
     border: 1px solid brown;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 25%;
+    width: 30%;
     height: 150px;
-    margin-left: 3%;
     margin-top: 20px;
     flex-direction: column;
     cursor:pointer;
@@ -46,6 +50,19 @@
 }
 #fileLabel img{
     height: 50px;
+}
+
+#uploadform #forInVid p{
+    border: 1px solid red;
+    margin-top: 20px;
+    width: 30%;
+    font-size: 15px;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+#forInVid:hover{
+    cursor: pointer;
 }
 #uploadform button{
     padding: 5px;
@@ -61,6 +78,43 @@
     cursor:pointer;
     width: 100px;
 }
+#uploading{
+    background:rgba(140, 140, 140, 0.304);
+    position: absolute;
+    height: 73%;
+    width: 68.5%;
+    margin-left: -110px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+}
+    .loader {
+        border: 5px solid #f3f3f3; /* Light grey */
+        border-top: 5px solid  rgb(201, 145, 0); /* Blue */
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      .lower{
+        border: 2px solid grey;
+        height: 20px;
+        margin-top: 5px;
+        width: 30%;
+      }
+      .lowerBack{
+        background:  rgb(201, 145, 0);
+        width: 20%;
+        height: 100%;
+      }
 @media screen and (max-Width:600px){
     #uploadform{
         width: 113%;

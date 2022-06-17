@@ -39,12 +39,13 @@ class watchVid extends React.Component {
         }}
         onMouseLeave ={()=>{
             var handBox = document.getElementsByClassName('handBox')
-            handBox[ind].pause()
             handBox[ind].currentTime = 0;
+            handBox[ind].pause()
         }}
         disablePictureInPicture
         muted
-        src={src}
+        poster="https://dawn-aviation.com/static/php/Uploads/files/pic1.jpg"
+        src='https://dawn-aviation.com/static/php/Uploads/files/testLink.mp4'
       />
       <div class="vidDet">
           <h5>Title of Video</h5>
@@ -62,7 +63,7 @@ class watchVid extends React.Component {
           <input id="searchInput" type="text" placeholder="Search here" />
         </div>
         <div id="leftPlay">
-          <video id='bigVidDOM' src={src} controls style={{ minHeight: this.state.height2 }} />
+          <video id='bigVidDOM' src='https://dawn-aviation.com/static/php/Uploads/files/testLink.mp4' controls style={{ minHeight: this.state.height2 }} />
           <div id="comments">
             <h4>Title of video</h4>
             <h5>Label {this.state.vidPlay}</h5>

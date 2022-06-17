@@ -1,0 +1,60 @@
+#notification{
+    border: 2px solid grey;
+    height: fit-content;
+    max-height: 400px;
+    width: 35%;
+    position: absolute;
+    right: 22%;
+    top: 90px;
+    padding: 1%;
+    background: white;
+    overflow: scroll;
+}
+
+#notification h5{
+    border-left: 3px solid rgb(201, 145, 0);
+    padding-left: 2px;
+}
+.notContent{
+    border-left: 3px solid rgb(201, 145, 0);
+    padding-left: 5px;
+    margin-top: 10px;
+}
+#flatlist{
+    border: 2px solid grey;
+    margin-top: 20px;
+    padding: 5px;
+    border-radius: 15px;
+}
+.notContent .date{
+    font-size: 11px;
+}
+.notContent .content{
+    font-size: 15px;
+    margin-top: 10px;
+}
+hr{
+    margin-top: 10px;
+}
+
+#dropSign{
+    border: 2px solid grey;
+    position: absolute;
+    right: 15%;
+    font-size: 14px;
+    background: white;
+    top: 80px;
+    padding: 5px;
+    text-decoration: none;
+
+}
+#dropSign h5{
+    margin-top: 3px;
+}
+#dropSign .link{
+    border: 1px solid grey;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px;
+    text-decoration: none;
+}

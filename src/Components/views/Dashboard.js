@@ -2,24 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./../styles/Dashboard.css";
 import Flatlist from "flatlist-react";
-
+// import {Player} from 'video-react'
 import ReactPlayer from 'react-player'
 import src from "./../images/omuna.mp4";
 import { toBeRequired } from "@testing-library/jest-dom/dist/matchers";
+import axios from "axios";
 
 function Dashboard() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [bigHeight, setBigHeight] = useState();
-  const videos = [
-    { title: "shelton1" },
-    { title: "shelton2" },
-    { title: "shelton3" },
-    { title: "shelton4" },
-    { title: "omondi" },
-  ];
+  const [videos, setVideos] = useState();
+  
   const handMouse = () => {
     this.play();
   };
+  // const src = 'https://dawn-aviation.com/Static/php/Uploads/files/testLink.mp4'
   useEffect(() => {
     var maxheight = window.innerHeight;
     var wantedHeight = (60 * maxheight) / 100;
@@ -31,6 +28,15 @@ function Dashboard() {
     //         this.play()
     //     })
     // });
+
+    axios.get(
+    'https://dawn-aviation.com/static/php/download.php'
+    ).then((Res)=>{
+      setVideos(Res.data)
+      console.log(Res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
   });
   const renderVideos = (vid,ind) => {
     return (
@@ -46,20 +52,20 @@ function Dashboard() {
         <div class="detailBox">
           <h5>Title of Vid</h5>
           <p>A lot of description</p>
-          <ReactPlayer
+          <video
             class="handBox"
             onMouseOver={() => {
               var handBox = document.getElementsByClassName("handBox");
-              handBox[ind].playing = true;
+              handBox[ind].play();
             }}
             onMouseLeave ={()=>{
                 var handBox = document.getElementsByClassName('handBox')
-                handBox[ind].playing = true
+                handBox[ind].play()
                 handBox[ind].currentTime = 0;
             }}
             disablePictureInPicture
             muted
-            url='https://dawn-aviation.com/Static/php/Uploads/files/testLink.mp4'
+            src={src}
           />
         </div>
       </div>

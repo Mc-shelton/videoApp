@@ -13,6 +13,7 @@ import LogOut from "./views/LogOut";
 import SignIn from "./views/SignIn";
 import signUp from "./views/signUp";
 import watchVid from "./views/watchVid";
+import ProfileSet from "./views/ProfileSet";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SwipeableViews from "react-swipeable-views";
@@ -162,6 +163,7 @@ function Main(props) {
           <Route path="/Favorite" component={Favorite} />
           <Route path="/LogOut" component={LogOut} />
           <Route path="/watchVid" component={watchVid} />
+          <Route path="/ProfileSet" component={ProfileSet} />
           <Redirect to={{
             pathname:'/Dashboard',
             state:{toggleB:true,userData:Data}
