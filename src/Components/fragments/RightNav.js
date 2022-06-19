@@ -16,34 +16,52 @@ export default class extends React.Component {
       addTask:false,
       addedTast:'',
       listTask:'',
-      showTaskbutt:true
+      showTaskbutt:true,
+      orignList:''
     };
   }
 
-  componentDidMount(){
-    var subList =[...document.getElementsByClassName('subList')]
-    var dotList = [...document.getElementsByClassName('dotList')]
+  getList =async ()=>{
+    let userData = await AsyncStorage.getItem('userData')
+    userData = JSON.parse(userData)
 
-    // var one =;
-    // var two =;
-    // var three = ;
+    let formData = new FormData()
+    formData.append('Email',userData['Email'])
+    axios({
+      url:'https://dawn-aviation.com/static/php/getTasks.php',
+      method:'POST',
+      data:formData
+    }).then((res)=>{
+      let response = res.data
+      this.setState({
+        orignList:response
+      })
+      console.log('tasj',res)
 
-
-    dotList.forEach(()=>{
-
+    }).catch(()=>{
+      alert('failed to fetch tasks')
     })
-    subList.forEach((obj,ind)=>{
-        obj.addEventListener('click',()=>{
-            // alert(ind)
+  }
+  componentDidMount(){
+    this.getList()
+  }
+  cover = (obj)=>{
+    console.log(obj)
+    let subList = [...document.getElementsByClassName('subList')]
+    let parList = [...document.getElementsByClassName('parList')]
+    let dotList = [...document.getElementsByClassName('dotList')]
+        
             for(let i=0;i<subList.length;i++){
               subList[i].style.border = 'none';
               subList[i].style.background = 'none';
             }
             obj.style.borderLeft = '5px solid black'
             obj.style.background = 'rgb(183,183,183,0.25)'
-        })
 
-    })
+  
+  }
+  delete=()=>{
+    alert()
   }
    addition= async ()=>{
     let userData = await AsyncStorage.getItem('userData')
@@ -63,6 +81,7 @@ export default class extends React.Component {
 
     }).then((res)=>{
       alert(res.data)
+      this.getList();
 
     }).catch(()=>{
       alert('Error')
@@ -78,11 +97,17 @@ export default class extends React.Component {
 
 
   }
-  renderTask = ()=>{
+renderTask = (item,ind)=>{
+  console.log('item',item)
     return(
-      <div class="subList">
+      <div class="subList" onClick={(e)=>{
+        this.cover(e.target)
+      }}>
         <div class="dotList"></div>
-        <p>Study for physics</p>
+        <p class='parList'>{item['Task']}</p>
+        {/* <p class='cancel' onClick={()=>{
+          this.delete()
+        }}>x</p> */}
       </div>
     )
   }
@@ -119,7 +144,7 @@ export default class extends React.Component {
 
                 <div id='boxsubList'>
                   <FlatList
-                  list={this.state.listTask}
+                  list={this.state.orignList}
                   renderItem={this.renderTask}
                   renderWhenEmpty={()=>{
                     return(

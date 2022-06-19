@@ -161,14 +161,15 @@
   padding: 5px;
   margin-top: 5px;
   width: 93%;
+  cursor: pointer;
 
   /* border: 2px solid red; */
 }
 .subList p{
   font-size: 15px;
   margin-left: 5px;
-  cursor: pointer;
   /* border: 2px solid red; */
+  overflow: hidden;
 }
 .subList .dotList{
   /* border: 2px solid red; */
@@ -176,7 +177,21 @@
   border-radius: 50%;
   height: 10px;
   width: 10px;
-  background: rgb(240, 64, 0);
+  background: rgb(240, 64, 0) !important;
+  border: none !important;
+}
+
+.subList p{
+  border: none !important;
+  background: none !important;
+}
+
+.subList .cancel{
+  border: 2px solid red;
+  background-color: red;
+  font-size: 15px;
+  float: right;
+  justify-items: flex-end;
 }
 #boxsubList{
   height: 100%;
