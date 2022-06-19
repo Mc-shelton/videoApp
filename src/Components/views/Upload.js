@@ -137,7 +137,8 @@ class Upload extends React.Component {
               }}
             />
             <label id="fileLabel" for="inFile">
-              <img src={FileArrowDown} />
+              <img src={FileArrowDown} id='img1' />
+              {/* <img src='' id='img2' class='preview'/> */}
               <p>Click to Upload ThumbNail</p>
             </label>
             <input
@@ -148,6 +149,15 @@ class Upload extends React.Component {
               style={{ display: "none" }}
               onChange={(e) => {
                 this.setState({ ThumbNail: e.target.files[0] });
+                let img1 =document.getElementById('img1')
+                // let img2 =document.getElementById('img2')
+                let label =document.getElementById('fileLabel')
+
+                let url = URL.createObjectURL(e.target.files[0])
+                // img2.src = url 
+                // img1.style.display = 'none'
+                label.style.background = `url(${url})`
+                label.style.backgroundSize = 'cover'
               }}
             />
             <label id="forInVid" for="inVid">

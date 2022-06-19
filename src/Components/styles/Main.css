@@ -5,6 +5,8 @@
 }
 .hand {
   cursor: pointer;
+  background-size: cover;
+  background-position: center;
 }
 #header1 {
   height: 90px;

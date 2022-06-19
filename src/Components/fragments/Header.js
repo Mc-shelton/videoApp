@@ -84,7 +84,7 @@ class Header extends React.Component {
           <img src={plus} alt="plus" id="plus" />
           <img src={drop} alt="drop" id="drop" />
         </div>
-        <div id="avator" class="hand">
+        <div id="avator" style={{border:'2px solid red',background:`url(${this.state.picSrc})`,backgroundSize:'cover',backgroundPositionX:'0 0'}} class="hand">
           <img src={this.state.picSrc} />
         </div>
         {this.state.Notify ? (
