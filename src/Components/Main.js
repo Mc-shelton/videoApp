@@ -56,7 +56,7 @@ function Main(props) {
           setIsLoggedIn(token);
           if(userData != 'undefined' && userData != null && userData != 'false'){
             setUserData(userData)
-            console.log('data',Data)
+            // console.log('data',JSON.parse(Data))
           }
         } else {
           if (props.location.state != undefined) {

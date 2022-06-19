@@ -6,13 +6,50 @@ import bell from "./../images/bell.svg";
 import plus from "./../images/add-one.png";
 import drop from "./../images/down-one.png";
 import avator from "./../images/pp.jfif";
+import axios from "axios";
+import FlatList from "flatlist-react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       Notify: false,
       dropSign: false,
+      Messages: "",
+      userData:'',
+      picSrc:avator
     };
+  }
+  async componentDidMount() {
+    // alert()
+    axios({
+      url: "https://dawn-aviation.com/static/php/notification.php",
+    })
+      .then((response) => {
+        // alert('got the data')
+        this.setState({ Messages: response.data });
+        console.log(this.state.Messages);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+      var useData = await AsyncStorage.getItem('userData')
+      useData = JSON.parse(useData)
+      console.log('header',useData,'eands')
+      this.setState({userData:useData})
+      this.setState({picSrc:useData['profPic']})
+    }
+  renderMessages(message) {
+    return (
+      <div>
+        <div class="notContent">
+          <h6>{message['Sender']}</h6>
+          <p class="date">{message['Date']}</p>
+          <p class="content">{message['Message']}</p>
+        </div>
+        <hr />
+      </div>
+    );
   }
   render() {
     return (
@@ -28,54 +65,37 @@ class Header extends React.Component {
               this.setState({ Notify: false });
             } else {
               this.setState({ Notify: true });
-              this.setState({dropSign:false})
+              this.setState({ dropSign: false });
             }
           }}
         />
-        <div id="dropDwn" class="hand" onClick={()=>{
-          if(this.state.dropSign == true){
-            this.setState({dropSign:false})
-          }else{
-            this.setState({Notify:false})
-            this.setState({dropSign:true})
-          }
-        }}>
+        <div
+          id="dropDwn"
+          class="hand"
+          onClick={() => {
+            if (this.state.dropSign == true) {
+              this.setState({ dropSign: false });
+            } else {
+              this.setState({ Notify: false });
+              this.setState({ dropSign: true });
+            }
+          }}
+        >
           <img src={plus} alt="plus" id="plus" />
           <img src={drop} alt="drop" id="drop" />
         </div>
         <div id="avator" class="hand">
-          <img src={avator} />
+          <img src={this.state.picSrc} />
         </div>
         {this.state.Notify ? (
           <div id="notification">
             <h5>Notifications</h5>
             <div id="flatlist">
-              <div class="notContent">
-                <h6>Name of sender</h6>
-                <p class="date">5/6/2022</p>
-                <p class="content">
-                  notContent and another content and another content and another
-                  content and another content
-                </p>
-              </div>
-              <hr />
-              <div class="notContent">
-                <h6>Name of sender</h6>
-                <p class="date">5/6/2022</p>
-                <p class="content">
-                  notContent and another content and another content and another
-                  content and another content
-                </p>
-              </div>
-              <hr />
-              <div class="notContent">
-                <h6>Name of sender</h6>
-                <p class="date">5/6/2022</p>
-                <p class="content">
-                  notContent and another content and another content and another
-                  content and another content
-                </p>
-              </div>
+              <FlatList
+                list={this.state.Messages}
+                renderItem={this.renderMessages}
+                renderWhenEmpty={()=><p>loading...</p>}
+              />
             </div>
           </div>
         ) : (
@@ -84,7 +104,7 @@ class Header extends React.Component {
         {this.state.dropSign ? (
           <div id="dropSign">
             <p>You signed in as</p>
-            <h5>Shelton</h5>
+            <h5>{this.state.userData['Name']}</h5>
             <Link to="/ProfileSet">
               <div class="link">Set Profile Pic</div>
             </Link>

@@ -1,3 +1,41 @@
 #bigProfile{
-    border: 2px solid red;
+    /* border: 2px solid #ff0000; */
+    width: 50%;
+    padding: 20px;
+    margin-left: 5%;
+    margin-top: 50px;
+
+}
+#labelForImage{
+    border: 2px solid orange;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    margin-top:10px;
+    border-radius: 15px;
+    padding: 20px;
+    flex-direction: column;
+}
+
+label:hover{
+    cursor: pointer;
+}
+#bigProfile input{
+    display: block;
+}
+#profButt{
+    display: block;
+    border:2px solid red;
+    width: 100px;
+    text-align: center;
+    border-radius: 15px;
+    margin-top: 10px;
+    color: rgb(134, 87, 0);
+    outline: none;
+    background: none;
+}
+#labelForImage img{
+    max-height: 200px;
 }
