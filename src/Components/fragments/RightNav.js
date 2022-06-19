@@ -3,6 +3,7 @@ import "./../styles/RightNav.css";
 import Calendar from "react-calendar";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import FlatList from "flatlist-react";
 // import 'react-calendar/dist/Calendar.css'
 export default class extends React.Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class extends React.Component {
       date: new Date(),
       addTask:false,
       addedTast:'',
+      listTask:'',
       showTaskbutt:true
     };
   }
@@ -44,26 +46,45 @@ export default class extends React.Component {
     })
   }
    addition= async ()=>{
-    // this.setState({
-    //   showTaskbutt:true,
-    //   addTask:false
-    // })
     let userData = await AsyncStorage.getItem('userData')
     userData = JSON.parse(userData)
-    alert(userData['UserId'])
+    // alert(userData['UserId'])
 
     let formData = new FormData()
+
+    if(this.state.addedTast != '' && this.state.addedTast != ' '){
     formData.append('Task',this.state.addedTast)
-    formData.append('UserId',userData['UserId'])
+    formData.append('UserId',userData['Email'])
     
     axios({
-      url:'link',
+      url:'https://dawn-aviation.com/static/php/tasks.php',
       method:'POST',
       data:formData
 
+    }).then((res)=>{
+      alert(res.data)
+
+    }).catch(()=>{
+      alert('Error')
     })
+  
+    this.setState({
+      showTaskbutt:true,
+      addTask:false
+    })
+  }else{
+      alert('please add a valid task')
+    }
 
 
+  }
+  renderTask = ()=>{
+    return(
+      <div class="subList">
+        <div class="dotList"></div>
+        <p>Study for physics</p>
+      </div>
+    )
   }
   render() {
     return (
@@ -97,22 +118,15 @@ export default class extends React.Component {
           </div>:<></>}
 
                 <div id='boxsubList'>
-              <div class="subList" style={{borderLeft:'5px solid black',background:'rgb(183,183,183,0.25)'}}>
-                <div class="dotList"></div>
-                <p>Study for physics</p>
-              </div>
-              <div class="subList">
-                <div class="dotList"></div>
-                <p>Study for physics</p>
-              </div>
-              <div class="subList">
-                <div class="dotList"></div>
-                <p>Study for physics</p>
-              </div>
-              <div class="subList">
-                <div class="dotList"></div>
-                <p>Study for physics</p>
-              </div>
+                  <FlatList
+                  list={this.state.listTask}
+                  renderItem={this.renderTask}
+                  renderWhenEmpty={()=>{
+                    return(
+                    <p style={{fontSize:'14px'}}>No tasks available</p>
+                    )
+                  }}
+                  />
               </div>
               {this.state.showTaskbutt?<button onClick={()=>{
                 this.setState({
