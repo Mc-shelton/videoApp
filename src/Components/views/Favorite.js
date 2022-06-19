@@ -1,8 +1,11 @@
 import React, { useEffect,useState } from 'react'
 import './../styles/Dashboard.css'
 import './../styles/search.css'
+import './../styles/favorite.css'
 import {Link} from 'react-router-dom'
 import FlatList from 'flatlist-react'
+import axios from 'axios'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 function Favorite(props){
     const[mxHeight, setMxHeight] = useState('20px')
     const [videos, setVideos] = useState('');
@@ -16,15 +19,23 @@ function Favorite(props){
     setMxHeight(wantedHeight);
     })
     var change
-    useEffect(()=>{
+    useEffect(async ()=>{
         setSearchText(<p style={{textAlign:'center'}}>type to search</p>)
+        let userData = await AsyncStorage.getItem('userData')
+        userData = JSON.parse(userData)
+        let formData = new FormData()
+        formData.append('Email',userData['Email'])
 
-        fetch('https://dawn-aviation.com/static/php/download.php')
-        .then((response)=>response.json())
+        axios({
+            url:'https://dawn-aviation.com/static/php/favorites.php',
+            method:'POST',
+            data:formData
+        })
         .then((responseJson)=>{
           console.log(responseJson)
         //   setVideos(responseJson)
           setVeryinit(responseJson)
+          setVideos(responseJson)
       })
         .catch((error) => {
           change = error;
@@ -44,7 +55,6 @@ function Favorite(props){
     if(!text || text === '' || text == ' '){
       console.log('first')
       setVideos(veryinit)
-      setVideos([])
       
     }
       else if(!filteredName.length){
