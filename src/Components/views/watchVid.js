@@ -61,7 +61,7 @@ class watchVid extends React.Component {
           <h5>{vid['videoName']}</h5>
           <h5 style={{color:'grey'}}><i>{vid['Label']}</i></h5>
           <p>{vid['videoDescription']}</p>
-          <h6>Marks : 80%</h6>
+          {/* <h6>Marks : 80%</h6> */}
       </div>
       </div>
       )
@@ -109,10 +109,7 @@ class watchVid extends React.Component {
             <h4>{this.state.initial[this.state.vidPlay]['videoName']}</h4>
             <h5>{this.state.initial[this.state.vidPlay]['Label']}</h5>
             <br />
-            <h5>Tutor's remarks</h5>
-            <h6>Tutor Name : Caleb Ongoti</h6>
-            <h6>Tutor's rating : 80%</h6>
-            <p>This is a remark by the tutor in charge</p>
+
           </div>
         </div>
         <div id="rightList" >

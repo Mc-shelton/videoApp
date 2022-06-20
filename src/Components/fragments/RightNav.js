@@ -60,8 +60,16 @@ export default class extends React.Component {
 
   
   }
-  delete=()=>{
-    alert()
+  delete=(ind)=>{
+    let formData= new FormData();
+    // alert(ind)
+    formData.append('DelInd',ind)
+    axios({
+      url:'https://dawn-aviation.com/static/php/delete.php',
+      method:'POST',
+      data:formData
+    })
+    this.getList()
   }
    addition= async ()=>{
     let userData = await AsyncStorage.getItem('userData')
@@ -103,7 +111,7 @@ renderTask = (item,ind)=>{
       <div class="subList" onClick={(e)=>{
         this.cover(e.target)
       }}>
-        <div class="dotList"></div>
+        <div class="dotList" onClick={()=>{this.delete(item['task_ID'])}}></div>
         <p class='parList'>{item['Task']}</p>
         {/* <p class='cancel' onClick={()=>{
           this.delete()
