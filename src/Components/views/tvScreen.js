@@ -12,15 +12,17 @@ class tvScreen extends React.Component {
               <div id="fbutt"></div>
               <div id="sbutt"></div>
             </div>
+            <p id="AddButt">+Add</p>
             <div id="ActComments">
                 <div id="bigCommentBox">
-              <div id="readComm"></div>
-              <div id="readComm"></div>
-              <div id="readComm"></div>
-              <div id="readComm"></div>
-              <div id="readComm"></div>
-              <input id="enterText"/>
-            </div></div>
+              <div class="readComm"></div>
+              <div  class="readComm"></div>
+              <div  class="readComm"></div>
+              <div  class="readComm"></div>
+              <div  class="readComm"></div>
+              </div>    
+              <textarea id="enterText" placeholder="Type here to add comment"/>
+            </div>
             <div id="watching">
               <div id="ActWatch">
                 <div></div>
