@@ -14,6 +14,7 @@ import SignIn from "./views/SignIn";
 import signUp from "./views/signUp";
 import watchVid from "./views/watchVid";
 import ProfileSet from "./views/ProfileSet";
+import tvScreen from "./views/tvScreen";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import SwipeableViews from "react-swipeable-views";
@@ -133,7 +134,8 @@ function Main(props) {
         {/* <SignIn setIsLoggedIn={setIsLoggedIn}>sdf</SignIn> */}
         <Route path="/SignIn" component={SignIn} />
         <Route path="/signUp" component={signUp} />
-        <Redirect to="/SignIn" />
+        <Route path="/tvScreen" component={tvScreen} />
+        <Redirect to="/tvScreen" />
       </Switch>
     );
   } else {

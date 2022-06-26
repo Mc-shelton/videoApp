@@ -13,7 +13,7 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Notify: false,
+      Notify: false,                       
       dropSign: false,
       Messages: "",
       userData:'',

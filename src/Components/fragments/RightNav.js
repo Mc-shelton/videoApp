@@ -58,6 +58,7 @@ export default class extends React.Component {
             obj.style.borderLeft = '5px solid black'
             obj.style.background = 'rgb(183,183,183,0.25)'
 
+ 
   
   }
   delete=(ind)=>{
