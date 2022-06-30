@@ -2,12 +2,23 @@ import React from "react";
 import "./../styles/tvScreen.css";
 import vidSrc from "./../images/omuna.mp4";
 
+
 class tvScreen extends React.Component {
+
+  componentDidMount(){
+    const buttToggle = document.getElementById('TvToggle')
+    const vidPlay = document.getElementById('vidCont')
+    alert(vidPlay)
+
+  }
   render() {
     return (
-      <div class="mainCont">
-        <video id="vidCont" src={vidSrc} controls />
-        <div class="commmentsCont">
+      <div class="mainCont" onMouseMove={()=>{
+        
+      }}>
+        <video id="vidCont"  src={vidSrc} controls autoplay/>
+        <div id="TvToggle" ></div>
+        {/* <div class="commmentsCont">
             <div id="commNav">
               <div id="fbutt"></div>
               <div id="sbutt"></div>
@@ -27,8 +38,8 @@ class tvScreen extends React.Component {
               <div id="ActWatch">
                 <div></div>
               </div>
-          </div>
-        </div>
+          </div> 
+        </div>*/}
       </div>
     );
   }

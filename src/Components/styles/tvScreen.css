@@ -10,7 +10,24 @@
     width: 99%;
     border: none;
 }
+#TvToggle{
+    background: red;
+    height: 40px;
+    border-radius:50% ;
+    width: 40px;
+    position: absolute;
+    bottom: 20%;
+    right: 3%;
+    box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue
+}
+#TvToggle:hover{
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+    right: 2.5%;
+    bottom: 19%;
 
+}
 .commmentsCont{
     width: 300px;
     max-width: 300px;
