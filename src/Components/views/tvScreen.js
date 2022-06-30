@@ -10,28 +10,47 @@ class tvScreen extends React.Component {
     };
   }
   componentDidMount() {
-    const buttToggle = document.getElementById("TvToggle");
-    const vidPlay = document.getElementById("vidCont");
-    const comments = document.getElementsByClassName("commmentsCont");
-    alert(comments)
+    // alert('Click unmute to play')
+    let buttToggle = document.getElementById("TvToggle");
+    let vidPlay = document.getElementById("vidCont");
+    var comments =document.getElementsByClassName("commmentsCont");
+    // console.log(comments)
 
     // alert(vidPlay)
 
     document.addEventListener("click", (e) => {
-      if (this.state.toggleCom == true) {
-        if (!comments.contains(e.target)) {
-          this.setState({
-            toggleCom:true
-          })
-        }
-      } else {
-      }
+      if(!buttToggle.contains(e.target)){
+      if(comments[0]!=undefined && !comments[0].contains(e.target)){
+        this.setState({
+          toggleCom:false
+        })
+      }}     
     });
+
+    var timer = 0
+    document.addEventListener('mousemove',()=>{
+      timer = 0
+    })
+    document.addEventListener('keypress',()=>{
+      timer = 0
+    })
+    document.addEventListener('clicked',()=>{
+      timer = 0
+    })
+    var idleInterval = setInterval(() => {
+      timer = timer +1;
+      if(timer> 5){
+        buttToggle.style.display = 'none'
+      }else{
+        buttToggle.style.display = 'block'
+      }
+    }, 400);
+
   }
   render() {
     return (
       <div class="mainCont" onMouseMove={() => {}}>
-        <video id="vidCont" src={vidSrc} controls autoplay />
+        <video id="vidCont" src={vidSrc} controls  autoPlay={true} muted/>
         <div
           id="TvToggle"
           onClick={() => {
@@ -41,7 +60,6 @@ class tvScreen extends React.Component {
         {this.state.toggleCom ? (
           <div class="commmentsCont">
             <div id="commNav">
-              <div id="cancelBut">x</div>
               <div id="fbutt"></div>
               <div id="sbutt"></div>
             </div>
@@ -54,6 +72,7 @@ class tvScreen extends React.Component {
                 <div class="readComm"></div>
                 <div class="readComm"></div>
               </div>
+              <div id="ActContact"></div>
               <textarea id="enterText" placeholder="Type here to add comment" />
             </div>
             <div id="watching">
