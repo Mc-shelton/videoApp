@@ -11,7 +11,9 @@
     border: none;
 }
 #TvToggle{
-    background: red;
+    background: url('./../images/menuLog.jpg') no-repeat;
+    background-position: center;
+    background-size:180% ;
     height: 40px;
     border-radius:50% ;
     width: 40px;
