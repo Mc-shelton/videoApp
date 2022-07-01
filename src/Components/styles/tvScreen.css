@@ -55,19 +55,26 @@
     width: 45px;
 }
 
-#fbutt,#sbutt{
+#fbutt,#sbutt,#lbutt{
     border: 2px solid grey;
     height: 30px;
     width: 30px;
     border-radius: 100%;
 }
 
-#fbutt:hover, #sbutt:hover{
+#fbutt:hover, #sbutt:hover,#lbutt:hover{
     cursor: pointer;
 }
 #sbutt{
     margin-top: 10px;
     background: url('./../images/download.png') no-repeat;
+    background-size: 70%;
+    background-position: center;
+    /* border: 2px solid red; */
+}
+#lbutt{
+    margin-top: 10px;
+    background: url('./../images/vidList.png') no-repeat;
     background-size: 70%;
     background-position: center;
     /* border: 2px solid red; */
@@ -79,13 +86,13 @@
     background-position: center;
 }
 
-#ActContdual,#ActComments{
+#ActContdual,#ActComments,#actContact,#actVidList{
     width: 249px;
     padding-top: 10px;
     height:92%;
     border-radius: 15px;
 }
-#bigCommentBox{
+#bigCommentBox,#actVidList{
     overflow: scroll;
     height: 93%;
     scroll-behavior: smooth;

@@ -2,12 +2,20 @@ import React from "react";
 import "./../styles/tvScreen.css";
 import vidSrc from "./../images/omuna.mp4";
 import axios from "axios";
+import FlatList from "flatlist-react";
 
 class tvScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       toggleCom: false,
+      actContList: 'none',
+      actVidList: 'block',
+      actComm: 'none',
+      vidList:[],
+      comments:[],
+      color:'blue',
+      contact:[]
     };
   }
   componentDidMount() {
@@ -52,7 +60,40 @@ class tvScreen extends React.Component {
       url:"https://dawn-aviation.com/static/php/getVidLink.php"
     }).then((response)=>{
       console.log(response)
+      this.setState({
+        vidList:response.data
+      })
+    }).catch((err)=>{
+      console.log(err)
     })
+
+    // write getting time funciton here on the tab
+    // get the list then get time, then compare with current time, then start playing with current time
+    //the php should not take time as input, but generate a calculation for time
+
+    let CurTime = new Date().getTime()
+    let vidTime = new Date('01/12/2022')
+
+
+    console.log('vid time',vidTime.getDate())
+    console.log('curent time',CurTime)
+     
+  }
+
+  renderContlist(){
+    return(
+      <div>this is the contact list</div>
+    )
+  }
+  renderVidList(item, ind){
+    return(
+      <video src={item['Link']} onMouseOver={(e)=>{
+        e.target.play()
+      }}
+      onMouseLeave={(e)=>{
+        e.target.pause()
+      }} muted/>
+    )
   }
   render() {
     return (
@@ -71,10 +112,28 @@ class tvScreen extends React.Component {
           <div class="commmentsCont">
             <div id="commNav">
               <div id="fbutt"></div>
+              <div id="lbutt"></div>
               <div id="sbutt"></div>
             </div>
             <p id="AddButt">+Add</p>
-            <div id="ActComments">
+
+            <div id="actContact" style={{display:this.state.actContList}}>
+              <FlatList
+              data={this.state.contact}
+              renderWhenEmpty={()=>{return(<div>nothing here</div>)}}
+              />
+            </div>
+
+            <div id="actVidList" style={{display:this.state.actVidList}}>
+              <FlatList
+              id="VidFlatList"
+              inverted
+              list={this.state.vidList}
+              renderItem={this.renderVidList}
+              renderWhenEmpty={()=>{return(<div>nothing here</div>)}}
+              />
+            </div>
+            <div id="ActComments" style={{display:this.state.actComm}}>
               <div id="bigCommentBox">
                 <div class="readComm"></div>
                 <div class="readComm"></div>
