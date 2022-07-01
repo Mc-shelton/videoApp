@@ -67,13 +67,22 @@
 }
 #sbutt{
     margin-top: 10px;
+    background: url('./../images/download.png') no-repeat;
+    background-size: 70%;
+    background-position: center;
+    /* border: 2px solid red; */
 }
 
-#ActContact,#ActComments{
+#fbutt{
+    background: url('./../images/images.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#ActContdual,#ActComments{
     width: 249px;
     padding-top: 10px;
     height:92%;
-    border: 2px solid red;
     border-radius: 15px;
 }
 #bigCommentBox{

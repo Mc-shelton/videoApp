@@ -1,6 +1,7 @@
 import React from "react";
 import "./../styles/tvScreen.css";
 import vidSrc from "./../images/omuna.mp4";
+import axios from "axios";
 
 class tvScreen extends React.Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class tvScreen extends React.Component {
     };
   }
   componentDidMount() {
-    // alert('Click unmute to play')
+    // alert('if no sound, Click unmute to play')
     let buttToggle = document.getElementById("TvToggle");
     let vidPlay = document.getElementById("vidCont");
     var comments =document.getElementsByClassName("commmentsCont");
@@ -46,11 +47,20 @@ class tvScreen extends React.Component {
       }
     }, 400);
 
+
+    axios({
+      url:"https://dawn-aviation.com/static/php/getVidLink.php"
+    }).then((response)=>{
+      console.log(response)
+    })
   }
   render() {
     return (
       <div class="mainCont" onMouseMove={() => {}}>
-        <video id="vidCont" src={vidSrc} controls  autoPlay={true} muted/>
+        <video id="vidCont" src={vidSrc} controls  autoPlay muted onEnded={(e)=>{
+          // alert('good')
+          e.target.src=vidSrc
+        }}/>
         <div
           id="TvToggle"
           onClick={() => {
