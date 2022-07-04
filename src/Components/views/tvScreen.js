@@ -127,7 +127,7 @@ class tvScreen extends React.Component {
             <div id="actVidList" style={{display:this.state.actVidList}}>
               <FlatList
               id="VidFlatList"
-              inverted
+              inverted   
               list={this.state.vidList}
               renderItem={this.renderVidList}
               renderWhenEmpty={()=>{return(<div>nothing here</div>)}}
