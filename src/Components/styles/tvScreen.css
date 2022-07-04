@@ -139,3 +139,36 @@
 #AddButt:hover{
 cursor: pointer;
 }
+
+#actVidList video{
+    border-radius: 10px;
+    margin-left: 5%;
+}
+
+
+#actContact h5{
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: -10px;
+}
+#Help{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    height: 90%;
+}
+#avatorTv{
+    border: 2px solid red;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    margin-bottom: 20px;
+    background: url('./../images/modern-company-logo-design-vector\ 1.png') center;
+    background-size:cover ;
+}
+
+#Help p{
+    margin-bottom: 5px;
+}

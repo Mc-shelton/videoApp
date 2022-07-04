@@ -87,7 +87,7 @@ class tvScreen extends React.Component {
   }
   renderVidList(item, ind){
     return(
-      <video src={item['Link']} onMouseOver={(e)=>{
+      <video src={item['Link']} poster={item['ThumbNail']} onMouseOver={(e)=>{
         e.target.play()
       }}
       onMouseLeave={(e)=>{
@@ -111,18 +111,41 @@ class tvScreen extends React.Component {
         {this.state.toggleCom ? (
           <div class="commmentsCont">
             <div id="commNav">
-              <div id="fbutt"></div>
-              <div id="lbutt"></div>
-              <div id="sbutt"></div>
+              <div id="fbutt" onClick={()=>{
+                this.setState({
+                  actContList:'block',
+                  actVidList:'none',
+                  actComm:'none'
+                })
+            }} ></div>
+              <div id="lbutt" onClick={()=>{
+              this.setState({
+                actContList:'none',
+                actVidList:'block',
+                actComm:'none'
+              })
+            }} ></div>
+              <div id="sbutt" onClick={()=>{
+              this.setState({
+                actContList:'none',
+                actVidList:'none',
+                actComm:'block'
+              })
+            }} ></div>
             </div>
             <p id="AddButt">+Add</p>
 
             <div id="actContact" style={{display:this.state.actContList}}>
-              <FlatList
-              data={this.state.contact}
-              renderWhenEmpty={()=>{return(<div>nothing here</div>)}}
-              />
-            </div>
+              <h5>Help Center</h5>
+              <div id="Help">
+                <div id="avatorTv"></div>
+                <h4>Phone</h4>
+                <p>072090290</p>
+                <h4>Email</h4>
+                <p>example@gmail.com</p>
+                </div>
+
+              </div>
 
             <div id="actVidList" style={{display:this.state.actVidList}}>
               <FlatList
