@@ -28,7 +28,7 @@ class watchVid extends React.Component {
   }
   renderVideos = (vid,ind)=>{
       return(
-      <div class='boxes' onClick={()=>{
+      <div class='boxes' onClmainIndmainIndick={()=>{
         //   var vid= document.getElementById('bigVidDOM')
         //   vid.src = 'https://www.youtube.com/watch?v=B-pZ4q2WPQA'
           this.setState({vidPlay:ind})

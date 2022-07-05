@@ -17,7 +17,7 @@ import ProfileSet from "./views/ProfileSet";
 import tvScreen from "./views/tvScreen";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import SwipeableViews from "react-swipeable-views";
+// import SwipeableViews from "react-swipeable-views";
 
 function Main(props) {
   var [isLoggedin, setIsLoggedIn] = useState(false);

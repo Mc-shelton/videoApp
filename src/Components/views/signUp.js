@@ -13,7 +13,7 @@ class signUp extends React.Component {
     if (window.innerWidth < 600) {
       var toggleNav = false;
     } else {
-      var toggleNav = true;
+       toggleNav = true;
     }
     this.state = {
       token: true,

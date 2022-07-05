@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import FileArrowDown from "./../images/FileArrowDown.png";
 import "./../styles/Dashboard.css";
 import "./../styles/Upload.css";
 
 import axios from "axios";
-import { upload } from "@testing-library/user-event/dist/upload";
+// import { upload } from "@testing-library/user-event/dist/upload";
 
 class Upload extends React.Component {
   constructor(props) {
