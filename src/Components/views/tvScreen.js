@@ -108,7 +108,7 @@ class tvScreen extends React.Component {
             {
               vidList: response.data,
             },
-          this.playerPicker
+          // this.playerPicker
           );
           response.data.forEach((e, i) => {
             this.state.TimeList.push(
@@ -206,7 +206,10 @@ class tvScreen extends React.Component {
           this.setState({
             viDSrc: this.state.vidList[ind]["Link"],
             mainInd: ind,
+          },()=>{
+            alert(this.state.mainInd)
           });
+          // alert(ind)
         }}
         muted
       />
@@ -226,7 +229,13 @@ class tvScreen extends React.Component {
           // allowfulscreen
 
           onEnded={(e) => {
-            if(this.state.mainInd == this.state.vidList.length){
+            if(this.state.mainInd == this.state.vidList.length-1){
+            
+              alert('equal', this.state.vidList.length, this. state.mainInd)
+              e.target.currentTime = 0
+              e.target.play()
+            
+          }else{
             this.setState({
               mainInd: this.state.mainInd +1,
             },()=>{
@@ -234,9 +243,7 @@ class tvScreen extends React.Component {
                 viDSrc:this.state.vidList[parseInt(this.state.mainInd)]['Link']
               })
             });
-          }else{
-            e.target.currentTime = 0
-            e.target.play()
+          e.target.play()
           }
             
           }}
