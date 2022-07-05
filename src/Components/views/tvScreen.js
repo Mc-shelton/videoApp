@@ -19,7 +19,7 @@ class tvScreen extends React.Component {
       contact: [],
       TimeList: [],
       notSortTime: [],
-      mainInd: [0],
+      mainInd: 0,
       name: "",
       viDSrc: "",
     };
@@ -41,6 +41,7 @@ class tvScreen extends React.Component {
     document.addEventListener("click", (e) => {
       if (!buttToggle.contains(e.target)) {
         if (comments[0] != undefined && !comments[0].contains(e.target)) {
+      e.preventDefault()
           this.setState({
             toggleCom: false,
           });
@@ -96,7 +97,34 @@ class tvScreen extends React.Component {
   }
 
   refresh = () => {
-    
+    axios({
+      url: "https://dawn-aviation.com/static/php/getVidLink.php",
+    })
+      .then((response) => {
+        if (response.data.length == this.state.vidList.length) {
+          
+        } else {
+          this.setState(
+            {
+              vidList: response.data,
+            },
+          this.playerPicker
+          );
+          response.data.forEach((e, i) => {
+            this.state.TimeList.push(
+              parseInt(new Date(e["uploadDate"]).valueOf())
+            );
+            this.state.notSortTime.push(
+              parseInt(new Date(e["uploadDate"]).valueOf())
+            );
+          });
+          // console.log("same data else", response.data.length);
+          // console.log("same list else", this.state.vidList.length);
+        }
+      })
+      .catch((err) => {
+        console.log("Network Error");
+      });
   };
   playerPicker = () => {
     console.log("not sort", this.state.notSortTime);
@@ -105,7 +133,7 @@ class tvScreen extends React.Component {
 
     // write getting time funciton here on the tab
     // get the list then get time, then compare with current time, then start playing with current time
-    //the php should not take time as input, but generate a calculation for time
+    //the php should not take time as input, but                                                                                                 generate a calculation for time
 
     let CurTime = new Date().getTime();
     let textTime = CurTime + 100000;
@@ -134,7 +162,8 @@ class tvScreen extends React.Component {
             this.state.notSortTime.indexOf(parseInt(indValue))
           );
           this.setState({
-            viDSrc: this.state.vidList[0]["Link"],
+            mainInd:this.state.notSortTime.indexOf(parseInt(indValue)),
+            viDSrc: this.state.vidList[this.state.notSortTime.indexOf(parseInt(indValue))]["Link"],
           });
         } else {
           alert("something went wrong");
@@ -147,9 +176,12 @@ class tvScreen extends React.Component {
     if (termInd + 1 == this.state.TimeList.length) {
       this.setState({
         viDSrc: this.state.vidList[this.state.vidList.length - 1]["Link"],
+        mainInd: this.state.vidList.length -1
       });
       // alert('no new video available')
     }
+
+    setInterval(this.refresh, 5000);
   };
 
   renderContlist() {
@@ -193,16 +225,20 @@ class tvScreen extends React.Component {
           muted
           // allowfulscreen
 
-          onEnded={(prevState) => {
+          onEnded={(e) => {
+            if(this.state.mainInd == this.state.vidList.length){
             this.setState({
-              mainInd: 20,
+              mainInd: this.state.mainInd +1,
+            },()=>{
+              this.setState({
+                viDSrc:this.state.vidList[parseInt(this.state.mainInd)]['Link']
+              })
             });
-            if (prevState.mainInd == this.state.mainInd) {
-              alert("hello");
-            } else {
-              alert(prevState.mainInd);
-            }
-            console.log(this.state.viDSrc);
+          }else{
+            e.target.currentTime = 0
+            e.target.play()
+          }
+            
           }}
           onMouseOver={() => {
             // console.log('last',this.state.vidList[0]['Link'])
@@ -248,7 +284,7 @@ class tvScreen extends React.Component {
                 }}
               ></div>
             </div>
-            <p id="AddButt">+Add {this.state.mainInd[0]}</p>
+            <p id="AddButt">+Add</p>
 
             <div id="actContact" style={{ display: this.state.actContList }}>
               <h5>Help Center</h5>

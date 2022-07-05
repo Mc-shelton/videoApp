@@ -13,11 +13,11 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Notify: false,                       
+      Notify: false,
       dropSign: false,
       Messages: "",
-      userData:'',
-      picSrc:avator
+      userData: "",
+      picSrc: avator,
     };
   }
   async componentDidMount() {
@@ -33,19 +33,19 @@ class Header extends React.Component {
       .catch((err) => {
         alert(err);
       });
-      var useData = await AsyncStorage.getItem('userData')
-      useData = JSON.parse(useData)
-      console.log('header',useData,'eands')
-      this.setState({userData:useData})
-      this.setState({picSrc:useData['profPic']})
-    }
+    var useData = await AsyncStorage.getItem("userData");
+    useData = JSON.parse(useData);
+    console.log("header", useData, "eands");
+    this.setState({ userData: useData });
+    this.setState({ picSrc: useData["profPic"] });
+  }
   renderMessages(message) {
     return (
       <div>
         <div class="notContent">
-          <h6>{message['Sender']}</h6>
-          <p class="date">{message['Date']}</p>
-          <p class="content">{message['Message']}</p>
+          <h6>{message["Sender"]}</h6>
+          <p class="date">{message["Date"]}</p>
+          <p class="content">{message["Message"]}</p>
         </div>
         <hr />
       </div>
@@ -84,7 +84,16 @@ class Header extends React.Component {
           <img src={plus} alt="plus" id="plus" />
           <img src={drop} alt="drop" id="drop" />
         </div>
-        <div id="avator" style={{border:'2px solid red',background:`url(${this.state.picSrc})`,backgroundSize:'cover',backgroundPositionX:'0 0'}} class="hand">
+        <div
+          id="avator"
+          style={{
+            border: "2px solid red",
+            background: `url(${this.state.picSrc})`,
+            backgroundSize: "cover",
+            backgroundPositionX: "0 0",
+          }}
+          class="hand"
+        >
           <img src={this.state.picSrc} />
         </div>
         {this.state.Notify ? (
@@ -94,7 +103,7 @@ class Header extends React.Component {
               <FlatList
                 list={this.state.Messages}
                 renderItem={this.renderMessages}
-                renderWhenEmpty={()=><p>loading...</p>}
+                renderWhenEmpty={() => <p>loading...</p>}
               />
             </div>
           </div>
@@ -104,7 +113,7 @@ class Header extends React.Component {
         {this.state.dropSign ? (
           <div id="dropSign">
             <p>You signed in as</p>
-            <h5>{this.state.userData['Name']}</h5>
+            <h5>{this.state.userData["Name"]}</h5>
             <Link to="/ProfileSet">
               <div class="link">Set Profile Pic</div>
             </Link>

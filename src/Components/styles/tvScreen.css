@@ -143,6 +143,7 @@ cursor: pointer;
 #actVidList video{
     border-radius: 10px;
     margin-left: 5%;
+    object-fit: cover;
 }
 
 #actVidList video:hover{
@@ -185,3 +186,6 @@ cursor: pointer;
     text-align: center;
 }
 
+.mainCont video{
+    object-fit: cover;
+}
