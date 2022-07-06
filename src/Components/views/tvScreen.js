@@ -21,13 +21,18 @@ class tvScreen extends React.Component {
       notSortTime: [],
       mainInd: 0,
       name: "",
+      muted:true,
       viDSrc: "",
+      vidNail:''
     };
   }
-  componentDidMount() {
-    while (this.state.name == "") {
-      console.log("no sense");
-    }
+
+  componentDidMount(){
+    document.addEventListener('load',()=>{
+      var videoBox = document.getElementById('vidCont')
+
+      console.log('vid',videoBox)
+    })
   }
   componentDidMount() {
     // alert('if no sound, Click unmute to play')
@@ -164,6 +169,9 @@ class tvScreen extends React.Component {
           this.setState({
             mainInd:this.state.notSortTime.indexOf(parseInt(indValue)),
             viDSrc: this.state.vidList[this.state.notSortTime.indexOf(parseInt(indValue))]["Link"],
+            vidNail: this.state.vidList[this.state.notSortTime.indexOf(parseInt(indValue))]["ThumbNail"],
+          },()=>{
+            document.getElementById('vidCont').currentTime = (index-list)
           });
         } else {
           alert("something went wrong");
@@ -176,6 +184,7 @@ class tvScreen extends React.Component {
     if (termInd + 1 == this.state.TimeList.length) {
       this.setState({
         viDSrc: this.state.vidList[this.state.vidList.length - 1]["Link"],
+        vidNail: this.state.vidList[this.state.vidList.length - 1]["ThumbNail"],
         mainInd: this.state.vidList.length -1
       });
       // alert('no new video available')
@@ -205,9 +214,10 @@ class tvScreen extends React.Component {
         onClick={() => {
           this.setState({
             viDSrc: this.state.vidList[ind]["Link"],
+            vidNail: this.state.vidList[ind]["ThumbNail"],
             mainInd: ind,
           },()=>{
-            alert(this.state.mainInd)
+            // alert(this.state.mainInd)
           });
           // alert(ind)
         }}
@@ -225,13 +235,13 @@ class tvScreen extends React.Component {
           src={this.state.viDSrc}
           controls
           autoPlay
-          muted
+          // muted
           // allowfulscreen
-
+          poster={this.state.vidNail}
           onEnded={(e) => {
             if(this.state.mainInd == this.state.vidList.length-1){
             
-              alert('equal', this.state.vidList.length, this. state.mainInd)
+              // alert('equal', this.state.vidList.length, this. state.mainInd)
               e.target.currentTime = 0
               e.target.play()
             
@@ -240,7 +250,8 @@ class tvScreen extends React.Component {
               mainInd: this.state.mainInd +1,
             },()=>{
               this.setState({
-                viDSrc:this.state.vidList[parseInt(this.state.mainInd)]['Link']
+                viDSrc:this.state.vidList[parseInt(this.state.mainInd)]['Link'],
+                vidNail:this.state.vidList[parseInt(this.state.mainInd)]['ThumbNail']
               })
             });
           e.target.play()

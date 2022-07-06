@@ -22,6 +22,7 @@ class Upload extends React.Component {
       mxHeight: "60px",
       Name: "",
       lowerWidth: "0%",
+      vidLine:''
     };
   }
   componentDidMount() {
@@ -41,8 +42,12 @@ class Upload extends React.Component {
       alert("Please Fill The Blank Spaces");
     } else {
       console.log(this.state.ThumbNail);
+      console.log(this.state.File);
       let formData = new FormData();
+      let vidTime = document.getElementById('vidTime')
+      console.log(vidTime.duration)
       formData.append("file", this.state.File);
+      formData.append("vidTime", vidTime.duration);
       formData.append("Topic", this.state.Topic);
       formData.append("Label", this.state.Label);
       formData.append("Title", this.state.Title);
@@ -162,6 +167,7 @@ class Upload extends React.Component {
             />
             <label id="forInVid" for="inVid">
               <p>Click to Upload Video</p>
+              <video id="vidTime" src={this.state.vidLine} autoPlay />
             </label>
             <input
               type="file"
@@ -171,7 +177,8 @@ class Upload extends React.Component {
               style={{ display: "none" }}
               onChange={(e) => {
                 this.setState({ File: e.target.files[0] });
-                this.setState({ showName: true });
+                this.setState({ showName: true,vidLine:URL.createObjectURL(e.target.files[0])});
+                console.log(URL.createObjectURL(e.target.files[0]))
               }}
             />
             {this.state.showName ? (
